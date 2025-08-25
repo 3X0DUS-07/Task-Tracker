@@ -1,8 +1,7 @@
 package com.caffellayohusseff.tasktracker.utils
 
 /**
- * Helper de fechas simple (hardcodeado por ahora).
- * Más adelante se puede migrar a java.time.LocalDate/LocalDateTime.
+ * Helper de fechas simple.
  */
 object FechaHelper {
     const val FORMATO_FECHA: String = "dd/MM/yyyy"
