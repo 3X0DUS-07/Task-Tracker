@@ -10,9 +10,11 @@ El proyecto implementa **data classes, enums, objetos singleton y clases interna
 
 ## **Características**
 
-- **Agregar tareas** con título, descripción y fecha de creación.
+- **Agregar tareas** con título, descripción, fecha de creación, categoría y prioridad.
 - **Estados de tarea** (`Pendiente`, `En progreso`, `Completada`) mediante `enum`.
-- **Modificar estado** de tareas por ID.
+- **Categorías** (`Estudio`, `Trabajo`, etc.) asociadas a las tareas.
+- **Prioridades** (`Baja`, `Media`, `Alta`) mediante `enum`.
+- **Modificar estado, categoría y prioridad** de tareas por ID.
 - **Visualización formateada** en consola.
 - **Reporte automático** del estado de todas las tareas.
 - Arquitectura **modular y escalable**.
@@ -32,8 +34,10 @@ TaskTracker/
 │                       ├── Main.kt
 │                       ├── model/
 │                       │   ├── Tarea.kt
+│                       │   ├── Categoria.kt
 │                       │   └── enums/
-│                       │       └── EstadoTarea.kt
+│                       │       ├── EstadoTarea.kt
+│                       │       └── Prioridad.kt
 │                       ├── service/
 │                       │   └── GestorTareas.kt
 │                       ├── ui/
@@ -47,22 +51,22 @@ TaskTracker/
 ## **Descripción de las capas**
 
 ### **1. `model/`**
-- **`Tarea.kt`**: `data class` que representa una tarea con ID, título, descripción, estado y fecha.  
-- **`EstadoTarea.kt`**: `enum class` con estados (`PENDIENTE`, `EN_PROGRESO`, `COMPLETADA`), incluye método `fromOrdinal()`.
+- **`Tarea.kt`**: `data class` que representa una tarea con ID, título, descripción, estado, fecha, categoría y prioridad.  
+- **`Categoria.kt`**: `data class` para definir categorías.
+- **`EstadoTarea.kt`**: `enum class` con estados (`PENDIENTE`, `EN_PROGRESO`, `COMPLETADA`).
+- **`Prioridad.kt`**: `enum class` con prioridades (`BAJA`, `MEDIA`, `ALTA`).
 
 ### **2. `service/`**
-- **`GestorTareas.kt`**: Lógica de negocio. Administra tareas (agregar, cambiar estado, filtrar, limpiar).  
-  - Incluye **inner class `Reporteador`** para generar un resumen global.
+- **`GestorTareas.kt`**: Lógica de negocio. Administra tareas (agregar, cambiar estado, categoría, prioridad, reporte).
 
 ### **3. `ui/`**
-- **`Menu.kt`**: Encargada de imprimir tareas en consola.  
-  - Usa **inner class `Impresora`** para formatear la salida.
+- **`Menu.kt`**: Interfaz de usuario. Muestra las tareas en consola de forma formateada.
 
 ### **4. `utils/`**
 - **`FechaHelper.kt`**: `object` (singleton) para obtener fecha/hora (mockeadas en esta versión).
 
 ### **5. `Main.kt`**
-- Punto de entrada. Crea tareas, las agrega, modifica estados, muestra lista y reporte final.
+- Punto de entrada. Crea categorías, tareas, cambia estados, asigna prioridades y muestra reporte.
 
 ---
 
@@ -76,24 +80,32 @@ Lista de tareas:
     Descripción: Descripción
     Estado: ⏳ Por hacer
     Fecha de creación: 19/12/2024
+    Categoría: Sin categoría
+    Prioridad: 🟡 Media
 ----------------------------------------------------
     ID: 2
     Título: Aprender Fundamentos en Kotlin
     Descripción: Descripción
     Estado: ✅ Completada
     Fecha de creación: 19/08/2025
+    Categoría: 1 - Estudio (Tareas relacionadas con aprendizaje)
+    Prioridad: 🔴 Alta
 ----------------------------------------------------
     ID: 3
     Título: Practicar Enums
     Descripción: Descripción
     Estado: 🔄 En progreso
     Fecha de creación: 19/08/2025
+    Categoría: 1 - Estudio (Tareas relacionadas con aprendizaje)
+    Prioridad: 🔴 Alta
 ----------------------------------------------------
     ID: 4
     Título: Construir Data Classes
     Descripción: Descripción
     Estado: ✅ Completada
     Fecha de creación: 19/08/2025
+    Categoría: 2 - Trabajo (Tareas laborales)
+    Prioridad: 🟢 Baja
 ----------------------------------------------------
 Total: 4 | ⏳ 1 | 🔄 1 | ✅ 2
 ```
@@ -110,7 +122,7 @@ Total: 4 | ⏳ 1 | 🔄 1 | ✅ 2
 ## **Cómo ejecutar**
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/3X0DUS-07/TaskTracker.git
+   git clone https://github.com/TU-USUARIO/TaskTracker.git
    cd TaskTracker
    ```
 2. Abrir el proyecto en **IntelliJ IDEA**.
@@ -120,7 +132,7 @@ Total: 4 | ⏳ 1 | 🔄 1 | ✅ 2
 ---
 
 ## **Mejoras futuras**
-- Agregar `enum` de **Prioridad**.
-- Implementar **categorías** para tareas.
-- Guardar tareas en **archivos o base de datos**.
-- Usar **java.time** para fechas reales.
+- Persistencia de datos (guardar tareas en archivos o base de datos).
+- Menú interactivo (leer entradas del usuario).
+- Uso de `java.time` para fechas reales.
+- Tests unitarios.
