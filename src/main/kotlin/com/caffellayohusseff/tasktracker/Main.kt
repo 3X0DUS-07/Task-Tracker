@@ -13,7 +13,6 @@ fun main() {
     val menu = Menu()
 
 
-// Test 1: Crear tarea 4 Tareas
     val t1 = Tarea(1, "Test", "Descripción", EstadoTarea.PENDIENTE, "19/12/2024")
     val t2 = Tarea(2, "Aprender Fundamentos en Kotlin", "Descripción", fechaCreacion = FechaHelper.obtenerFechaActual())
     val t3 = Tarea(3, "Practicar Enums", "Descripción", fechaCreacion = FechaHelper.obtenerFechaActual())
