@@ -122,7 +122,7 @@ Total: 4 | ⏳ 1 | 🔄 1 | ✅ 2
 ## **Cómo ejecutar**
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/TU-USUARIO/TaskTracker.git
+   git clone https://github.com/3X0DUS-07/TaskTracker.git
    cd TaskTracker
    ```
 2. Abrir el proyecto en **IntelliJ IDEA**.
