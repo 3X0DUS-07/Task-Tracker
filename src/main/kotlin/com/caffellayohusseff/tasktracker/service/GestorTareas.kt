@@ -1,47 +1,51 @@
 package com.caffellayohusseff.tasktracker.service
 
-
 import com.caffellayohusseff.tasktracker.model.Tarea
+import com.caffellayohusseff.tasktracker.model.Categoria
 import com.caffellayohusseff.tasktracker.model.enums.EstadoTarea
+import com.caffellayohusseff.tasktracker.model.enums.Prioridad
 
-
-/**
- * Capa de servicio: orquesta operaciones sobre Tarea.
- */
 class GestorTareas {
     private val tareas = mutableListOf<Tarea>()
+    private val categorias = mutableListOf<Categoria>()
 
-
+    // --- Gestión de Tareas ---
     fun agregarTarea(tarea: Tarea) {
         tareas.add(tarea)
     }
 
-
-    fun cambiarEstado(id: Int, nuevo: EstadoTarea) {
-        val t = tareas.firstOrNull { it.id == id }
-        if (t != null) t.cambiarEstado(nuevo)
+    fun cambiarEstado(idTarea: Int, nuevoEstado: EstadoTarea) {
+        tareas.find { it.id == idTarea }?.cambiarEstado(nuevoEstado)
     }
 
+    fun cambiarPrioridad(idTarea: Int, nuevaPrioridad: Prioridad) {
+        tareas.find { it.id == idTarea }?.cambiarPrioridad(nuevaPrioridad)
+    }
 
     fun obtenerTareas(): List<Tarea> = tareas
 
+    // --- Gestión de Categorías ---
+    fun agregarCategoria(categoria: Categoria) {
+        categorias.add(categoria)
+    }
 
-    fun buscarPorEstado(estado: EstadoTarea): List<Tarea> = tareas.filter { it.estado == estado }
+    fun asignarCategoria(idTarea: Int, idCategoria: Int): Boolean {
+        val tarea = tareas.find { it.id == idTarea }
+        val categoria = categorias.find { it.id == idCategoria }
+        return if (tarea != null && categoria != null) {
+            tarea.categoria = categoria
+            true
+        } else false
+    }
 
-
-    fun limpiar() { tareas.clear() }
-
-
-    /**
-     * Clase interna funcional: accede a las tareas para generar un pequeño resumen.
-     */
+    // --- Reportes ---
     inner class Reporteador {
         fun generarResumenGeneral(): String {
-            val total = tareas.size
             val pendientes = tareas.count { it.estado == EstadoTarea.PENDIENTE }
             val progreso = tareas.count { it.estado == EstadoTarea.EN_PROGRESO }
-            val completas = tareas.count { it.estado == EstadoTarea.COMPLETADA }
-            return "Total: $total | ⏳ $pendientes | 🔄 $progreso | ✅ $completas"
+            val completadas = tareas.count { it.estado == EstadoTarea.COMPLETADA }
+
+            return "Total: ${tareas.size} | ⏳ $pendientes | 🔄 $progreso | ✅ $completadas"
         }
     }
 }
