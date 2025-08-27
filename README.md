@@ -2,6 +2,7 @@
 
 ![Kotlin](https://img.shields.io/badge/Kotlin-1.9-blue?logo=kotlin&logoColor=white)
 ![Status](https://img.shields.io/badge/Status-Completed-brightgreen)
+![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 TaskTracker es una aplicación de consola escrita en **Kotlin** que permite **gestionar tareas** aplicando **Programación Orientada a Objetos (POO)**.  
 El proyecto implementa **data classes, enums, objetos singleton y clases internas**, siguiendo una **arquitectura modular en capas**.
@@ -122,7 +123,7 @@ Total: 4 | ⏳ 1 | 🔄 1 | ✅ 2
 ## **Cómo ejecutar**
 1. Clonar el repositorio:
    ```bash
-   git clone https://github.com/3X0DUS-07/TaskTracker.git
+   git clone https://github.com/3X0DUS-07    /TaskTracker.git
    cd TaskTracker
    ```
 2. Abrir el proyecto en **IntelliJ IDEA**.
